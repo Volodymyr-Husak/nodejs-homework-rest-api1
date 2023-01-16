@@ -27,7 +27,11 @@ const removeContact = async (contactId) => {
     return null;
   }
   const newContacts = contacts.filter((contact) => contact.id !== contactId);
-  await fs.writeFile(contactsPath, JSON.stringify(newContacts), "utf8");
+  await fs.writeFile(
+    contactsPath,
+    JSON.stringify(newContacts, null, 4),
+    "utf8"
+  );
   return currentContactById;
 };
 
@@ -43,7 +47,11 @@ const addContact = async (name, email, phone) => {
     phone,
   };
   const newContacts = [...contacts, newContact];
-  await fs.writeFile(contactsPath, JSON.stringify(newContacts), "utf8");
+  await fs.writeFile(
+    contactsPath,
+    JSON.stringify(newContacts, null, 4),
+    "utf8"
+  );
   const newData = await fs.readFile(contactsPath, "utf8");
   const contacts2 = JSON.parse(newData);
   const currentContact = contacts2.find(
@@ -68,7 +76,11 @@ const updateContact = async (contactId, body) => {
     (contact) => contact.id !== contactId
   );
   const newContacts = [...contactsWithoutContactById, updateContact];
-  await fs.writeFile(contactsPath, JSON.stringify(newContacts), "utf8");
+  await fs.writeFile(
+    contactsPath,
+    JSON.stringify(newContacts, null, 4),
+    "utf8"
+  );
 
   return updateContact;
 };
