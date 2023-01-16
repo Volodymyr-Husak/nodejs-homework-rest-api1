@@ -1,43 +1,34 @@
 const express = require("express");
 
-const Joi = require("joi");
+const {
+  contactsPostSchema,
+  contactsPutSchema,
+} = require("../../schemas/contactsSchemas");
 
 const contacts = require("../../models/contacts");
 
+const {
+  getContactsController,
+} = require("../../controllers/contactsControllers");
+
 const router = express.Router();
 
-const contactsPostSchema = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
-});
-const contactsPutSchema = Joi.object({
-  name: Joi.string().min(3).max(30),
-  email: Joi.string(),
-  phone: Joi.string(),
-})
-  .required()
-  .min(1);
-
 // GET all contacts
-router.get("/", async (req, res, next) => {
-  try {
-    const data = await contacts.listContacts();
+router.get("/", getContactsController);
+// async (req, res, next) => {
+// try {
+//   const data = await contacts.listContacts();
 
-    res.json({
-      status: "success",
-      code: 200,
-      data,
-    });
-  } catch (error) {
-    next(error);
-    // res.status(500).json({
-    //   status: "error",
-    //   code: 500,
-    //   message: "Server error",
-    // });
-  }
-});
+//   res.json({
+//     status: "success",
+//     code: 200,
+//     data,
+//   });
+// } catch (error) {
+//   next(error);
+// }
+// }
+// );
 
 // GET contact by id
 router.get("/:contactId", async (req, res, next) => {
