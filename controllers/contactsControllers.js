@@ -1,19 +1,22 @@
-const {
-  listContacts,
-  getContactById,
-  addContact,
-  removeContact,
-  updateContact,
-} = require("../models/contacts");
+// const {
+//   listContacts,
+//   getContactById,
+//   addContact,
+//   removeContact,
+//   updateContact,
+// } = require("../models/contacts");
+
+const { Contact } = require("../DB/contactModal");
 
 async function getContactsController(req, res) {
   try {
-    const data = await listContacts();
+    // const data = await listContacts();
+    const contacts = await Contact.find();
 
     res.json({
       status: "success",
       code: 200,
-      data,
+      contacts,
     });
   } catch (error) {
     // next(error);
@@ -28,9 +31,10 @@ async function getContactsController(req, res) {
 async function getContactByIdController(req, res) {
   try {
     const { contactId } = req.params;
-    const data = await getContactById(contactId);
+    // const data = await getContactById(contactId);
+    const contact = await Contact.findOne({ _id: contactId });
 
-    if (!data) {
+    if (!contact) {
       res.status(404).json({
         status: "error",
         code: 404,
@@ -42,7 +46,7 @@ async function getContactByIdController(req, res) {
     res.json({
       status: "success",
       code: 200,
-      data,
+      contact,
     });
   } catch (error) {
     // next(error);
@@ -56,14 +60,25 @@ async function getContactByIdController(req, res) {
 
 async function postContactController(req, res) {
   try {
-    const { name, email, phone } = req.body;
+    const { name, email, phone, favorite } = req.body;
+    const newContact = {
+      name,
+      email,
+      phone,
+      favorite,
+    };
 
-    const data = await addContact(name, email, phone);
+    if (!newContact.favorite) {
+      newContact.favorite = false;
+    }
+    // const data = await addContact(name, email, phone);
+    // const newContact = Contact.create({ name, email, phone });
+    Contact.create(newContact);
 
     res.status(201).json({
       status: "success",
       code: 201,
-      data,
+      newContact,
     });
   } catch (error) {
     //   next(error);
@@ -78,9 +93,10 @@ async function postContactController(req, res) {
 async function deleteContactController(req, res) {
   try {
     const { contactId } = req.params;
-    const data = await removeContact(contactId);
+    // const data = await removeContact(contactId);
+    const contact = await Contact.findOneAndRemove({ _id: contactId });
 
-    if (!data) {
+    if (!contact) {
       return res.status(404).json({
         status: "error",
         code: 404,
@@ -92,7 +108,7 @@ async function deleteContactController(req, res) {
       status: "success",
       code: 200,
       message: "contact deleted",
-      data,
+      contact,
     });
   } catch (error) {
     // next(error);
@@ -107,7 +123,13 @@ async function deleteContactController(req, res) {
 async function putContactByIdController(req, res) {
   try {
     const { contactId } = req.params;
-    const result = await updateContact(contactId, req.body);
+    // const result = await updateContact(contactId, req.body);
+    const result = await Contact.findOneAndUpdate(
+      { _id: contactId },
+      { $set: req.body }
+    );
+    // console.log(updateContact);
+    const updateContact = await Contact.findOne({ _id: contactId });
 
     if (!result) {
       return res.status(404).json({
@@ -119,7 +141,7 @@ async function putContactByIdController(req, res) {
     res.json({
       status: "success",
       code: 200,
-      result,
+      updateContact,
     });
   } catch (error) {
     // next(error);
@@ -130,6 +152,30 @@ async function putContactByIdController(req, res) {
     });
   }
 }
+async function updateStatusContactByIdController(req, res) {
+  const { contactId } = req.params;
+
+  const result = await Contact.findOneAndUpdate(
+    { _id: contactId },
+    { $set: req.body }
+  );
+
+  const updateContact = await Contact.findOne({ _id: contactId });
+
+  if (!result) {
+    return res.status(404).json({
+      status: "error",
+      code: 404,
+      message: "Not found",
+    });
+  }
+
+  res.json({
+    status: "success",
+    code: 200,
+    updateContact,
+  });
+}
 
 module.exports = {
   getContactsController,
@@ -137,4 +183,5 @@ module.exports = {
   postContactController,
   deleteContactController,
   putContactByIdController,
+  updateStatusContactByIdController,
 };
