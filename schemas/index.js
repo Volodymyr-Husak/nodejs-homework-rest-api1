@@ -1,11 +1,11 @@
 const {
-  contactsPostSchema,
-  contactsPutSchema,
-  contactsPatchSchema,
+  contactPostSchema,
+  contactPutSchema,
+  contactPatchSchema,
 } = require("./contacts");
 
 module.exports = {
-  contactsPostSchema,
-  contactsPutSchema,
-  contactsPatchSchema,
+  contactPostSchema,
+  contactPutSchema,
+  contactPatchSchema,
 };

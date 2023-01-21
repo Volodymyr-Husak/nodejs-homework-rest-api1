@@ -1,9 +1,9 @@
 const express = require("express");
 
 const {
-  contactsPostSchema,
-  contactsPutSchema,
-  contactsPatchSchema,
+  contactPostSchema,
+  contactPutSchema,
+  contactPatchSchema,
 } = require("../../schemas");
 
 const {
@@ -24,15 +24,15 @@ router.get("/", getAllContacts);
 router.get("/:contactId", getContact);
 
 // POST contact
-router.post("/", contactsPostSchema, addContact);
+router.post("/", contactPostSchema, addContact);
 
 // DELETE contact
 router.delete("/:contactId", deleteContact);
 
 // UPDATE contact
-router.put("/:contactId", contactsPutSchema, updateContact);
+router.put("/:contactId", contactPutSchema, updateContact);
 
 // UPDATE_STATUS contact
-router.patch("/:contactId", contactsPatchSchema, updateStatusContact);
+router.patch("/:contactId", contactPatchSchema, updateStatusContact);
 
 module.exports = router;
