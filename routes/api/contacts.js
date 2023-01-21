@@ -1,10 +1,6 @@
 const express = require("express");
 
-const {
-  contactPostSchema,
-  contactPutSchema,
-  contactPatchSchema,
-} = require("../../schemas");
+const { contactSchemes } = require("../../schemas");
 
 const {
   getAllContacts,
@@ -14,6 +10,9 @@ const {
   updateContact,
   updateStatusContact,
 } = require("../../controllers");
+
+const { contactPostSchema, contactPutSchema, contactPatchSchema } =
+  contactSchemes;
 
 const router = express.Router();
 
