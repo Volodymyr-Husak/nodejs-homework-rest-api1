@@ -1,9 +1,9 @@
-const { contactsPostSchema } = require("./contactPostSchema");
-const { contactsPutSchema } = require("./contactPutSchema");
-const { contactsPatchSchema } = require("./contactPatchSchema");
+const { contactPostSchema } = require("./contactPostSchema");
+const { contactPutSchema } = require("./contactPutSchema");
+const { contactPatchSchema } = require("./contactPatchSchema");
 
 module.exports = {
-  contactsPostSchema,
-  contactsPutSchema,
-  contactsPatchSchema,
+  contactPostSchema,
+  contactPutSchema,
+  contactPatchSchema,
 };

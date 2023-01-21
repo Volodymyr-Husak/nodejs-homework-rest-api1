@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const contactsPatchSchema = (req, res, next) => {
+const contactPatchSchema = (req, res, next) => {
   const schema = Joi.object({
     favorite: Joi.boolean().required(),
   }).required();
@@ -18,5 +18,5 @@ const contactsPatchSchema = (req, res, next) => {
 };
 
 module.exports = {
-  contactsPatchSchema,
+  contactPatchSchema,
 };

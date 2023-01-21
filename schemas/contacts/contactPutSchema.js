@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const contactsPutSchema = (req, res, next) => {
+const contactPutSchema = (req, res, next) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(30),
     email: Joi.string(),
@@ -22,5 +22,5 @@ const contactsPutSchema = (req, res, next) => {
 };
 
 module.exports = {
-  contactsPutSchema,
+  contactPutSchema,
 };
