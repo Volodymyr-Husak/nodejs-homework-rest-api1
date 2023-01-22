@@ -6,11 +6,11 @@ async function getAllContacts(req, res) {
     // const data = await listContacts();
     const { _id } = req.user;
     // console.log(req.query);
-    // const { page = 1, limit = 20 } = req.query;
-    // const skip = (page - 1) * limit;
+    const { page = 1, limit = 20 } = req.query;
+    const skip = (page - 1) * limit;
     const contacts = await Contact.find({ owner: _id }, "", {
-      // skip,
-      // limit: Number(limit),
+      skip,
+      limit: Number(limit),
     });
 
     res.json({
