@@ -1,5 +1,7 @@
-const registerRouter = require("./register");
+const authRouter = require("./auth");
+const usersRouter = require("./users");
 
 module.exports = {
-  registerRouter,
+  authRouter,
+  usersRouter,
 };

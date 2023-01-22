@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const userPostSchema = (req, res, next) => {
+const joiRegisterSchema = (req, res, next) => {
   const schema = Joi.object({
     password: Joi.string().min(6).max(10).required(),
     email: Joi.string().required(),
@@ -11,7 +11,7 @@ const userPostSchema = (req, res, next) => {
 
   if (error) {
     return res.status(400).json({
-      status: "error",
+      status: "Bad Request",
       code: 400,
       message: error.message,
     });
@@ -20,5 +20,5 @@ const userPostSchema = (req, res, next) => {
 };
 
 module.exports = {
-  userPostSchema,
+  joiRegisterSchema,
 };

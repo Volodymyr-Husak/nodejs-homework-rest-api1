@@ -3,8 +3,12 @@ const { Contact } = require("../../DB");
 async function getContact(req, res) {
   try {
     const { contactId } = req.params;
-    // const data = await getContactById(contactId);
-    const contact = await Contact.findOne({ _id: contactId });
+    const { _id } = req.user;
+    const contacts = await Contact.find({ owner: _id });
+
+    const contact = contacts.find((cont) => cont._id.toString() === contactId);
+
+    // const contact = await Contact.findOne({ _id: contactId });
 
     if (!contact) {
       res.status(404).json({

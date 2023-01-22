@@ -1,5 +1,5 @@
-const { register } = require("./register");
+const { getCurrentUser } = require("./getCurrentUser");
 
 module.exports = {
-  register,
+  getCurrentUser,
 };

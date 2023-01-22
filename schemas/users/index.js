@@ -1,5 +1,7 @@
-const { userPostSchema } = require("./userPostSchema");
+const { joiRegisterSchema } = require("./joiRegisterSchema");
+const {joiRLoginSchema}=require('./joiLoginSchema')
 
 module.exports = {
-  userPostSchema,
+  joiRegisterSchema,
+  joiRLoginSchema
 };
