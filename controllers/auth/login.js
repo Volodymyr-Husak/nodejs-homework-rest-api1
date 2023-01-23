@@ -31,6 +31,7 @@ async function login(req, res) {
     };
 
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+    await User.findByIdAndUpdate(user.id, { token });
     // await User.create({ password: hashPassword, email, subscription });
     res.status(200).json({
       status: "Ok",

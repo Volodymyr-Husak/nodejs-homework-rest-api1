@@ -22,6 +22,7 @@ async function register(req, res) {
       code: 201,
       user: {
         email,
+        password,
         subscription,
       },
     });
