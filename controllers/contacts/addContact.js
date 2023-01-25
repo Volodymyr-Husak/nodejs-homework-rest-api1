@@ -4,7 +4,7 @@ async function addContact(req, res) {
   try {
     const { _id } = req.user;
     const { name, email, phone, favorite } = req.body;
-    console.log(name);
+    // console.log(name);
     const newContact = {
       name,
       email,
