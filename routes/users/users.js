@@ -1,8 +1,16 @@
 const express = require("express");
 
-const { getCurrentUser, updateSubscriptionUser } = require("../../controllers");
+const {
+  getCurrentUser,
+  updateSubscriptionUser,
+  updateAvatar,
+} = require("../../controllers");
 
-const { auth, userSubscriptionStandard } = require("../../middlewares");
+const {
+  auth,
+  userSubscriptionStandard,
+  uploadAvatar,
+} = require("../../middlewares");
 const { userSchemes } = require("../../schemas");
 const { userPatchSchema } = userSchemes;
 
@@ -16,5 +24,6 @@ router.patch(
   userSubscriptionStandard,
   updateSubscriptionUser
 );
+router.patch("/avatars", auth, uploadAvatar.single("avatar"), updateAvatar);
 
 module.exports = router;

@@ -8,7 +8,11 @@ const {
 } = require("./contacts");
 
 const { register, login, logout } = require("./auth");
-const { getCurrentUser, updateSubscriptionUser } = require("./users");
+const {
+  getCurrentUser,
+  updateSubscriptionUser,
+  updateAvatar,
+} = require("./users");
 
 module.exports = {
   getAllContacts,
@@ -22,4 +26,5 @@ module.exports = {
   getCurrentUser,
   logout,
   updateSubscriptionUser,
+  updateAvatar,
 };
