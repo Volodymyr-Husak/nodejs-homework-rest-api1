@@ -4,6 +4,7 @@ const {
   getCurrentUser,
   updateSubscriptionUser,
   updateAvatar,
+  verifyEmail,
 } = require("../../controllers");
 
 const {
@@ -25,5 +26,6 @@ router.patch(
   updateSubscriptionUser
 );
 router.patch("/avatars", auth, uploadAvatar.single("avatar"), updateAvatar);
+router.get("/verify/:verificationToken", verifyEmail);
 
 module.exports = router;

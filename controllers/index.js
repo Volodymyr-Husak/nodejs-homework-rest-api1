@@ -12,6 +12,7 @@ const {
   getCurrentUser,
   updateSubscriptionUser,
   updateAvatar,
+  verifyEmail,
 } = require("./users");
 
 module.exports = {
@@ -27,4 +28,5 @@ module.exports = {
   logout,
   updateSubscriptionUser,
   updateAvatar,
+  verifyEmail,
 };

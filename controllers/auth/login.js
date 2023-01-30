@@ -8,12 +8,12 @@ async function login(req, res) {
   try {
     const { password, email } = req.body;
     const user = await User.findOne({ email });
-    if (!user) {
+    if (!user || !user.verify) {
       // throw new Unauthorized(`Email ${email} not found`);
       return res.status(401).json({
         status: "Unauthorized",
         code: 401,
-        message: `Email ${email} not found`,
+        message: `Email ${email} not found or not verify`,
       });
     }
     const passCompare = bcrypt.compareSync(password, user.password);
