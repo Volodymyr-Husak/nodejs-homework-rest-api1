@@ -5,6 +5,7 @@ const {
   updateSubscriptionUser,
   updateAvatar,
   verifyEmail,
+  reVerification,
 } = require("../../controllers");
 
 const {
@@ -13,7 +14,7 @@ const {
   uploadAvatar,
 } = require("../../middlewares");
 const { userSchemes } = require("../../schemas");
-const { userPatchSchema } = userSchemes;
+const { userPatchSchema, presenceEmailSchema } = userSchemes;
 
 const router = express.Router();
 
@@ -27,5 +28,6 @@ router.patch(
 );
 router.patch("/avatars", auth, uploadAvatar.single("avatar"), updateAvatar);
 router.get("/verify/:verificationToken", verifyEmail);
+router.post("/verify", presenceEmailSchema, reVerification);
 
 module.exports = router;
