@@ -1,6 +1,6 @@
 const { User } = require("../../DB");
 
-const { sendEmail } = require("../../helpers");
+const { sendEmail } = require("../../services");
 
 async function reVerification(req, res) {
   try {

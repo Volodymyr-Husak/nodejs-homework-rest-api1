@@ -1,6 +1,6 @@
 const { User } = require("../../DB");
 
-const { sendEmail } = require("../../helpers");
+const { sendEmail } = require("../../services");
 const { v4: uuidv4 } = require("uuid");
 
 const bcrypt = require("bcryptjs");
